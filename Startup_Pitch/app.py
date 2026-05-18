@@ -7,7 +7,7 @@ from openai import OpenAI
 
 
 app = FastAPI()
-
+API_KEY="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"
 class StartupForm(BaseModel):
     StartupDescription: str
     ProductStage: Literal["Idea", "MVP", "Early Revenue"]
