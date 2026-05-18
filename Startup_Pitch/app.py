@@ -5,7 +5,7 @@ from typing import Literal
 import uvicorn
 from openai import OpenAI
 
-API_KEY = "Your_API_KEY"
+
 app = FastAPI()
 
 class StartupForm(BaseModel):
