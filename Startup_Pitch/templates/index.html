@@ -180,6 +180,8 @@
                     event.preventDefault()
                     Pitch_div.style.filter = "blur(2.5px)"
                     const spinner = document.createElement("div")
+                    generate_pitch.disabled = true
+                    
                     spinner.style.backgroundColor = "rgb(255,255,255)"
                     spinner.style.border = "5px solid black"
                     spinner.style.borderTop = "5px solid lightgray"
@@ -194,6 +196,7 @@
                     fetch("/generate_pitch", {method: "POST", headers : {"Content-type": "application/json"}, body: JSON.stringify({ProductStage: Product_select.value, StartupDescription: startup_textarea.value})})
                     .then(response => response.json())
                     .then(function(data){
+                        generate_pitch.disabled = false
                         if(data.error){
                             alert(data.error)
                         }
@@ -203,6 +206,7 @@
                         }
                         
                         Pitch_div.style.filter = ""
+
                         spinner.remove()
                         
                         
