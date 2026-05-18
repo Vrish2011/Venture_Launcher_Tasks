@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Startup Pitch generator</title>
+        <style>
+            #wrapper{
+                position: fixed;
+                top:0%;
+                left:0%;
+                width:100%;
+                height:100%;
+                background-color: rgb(200,200,200)
+            }
+            #Pitch_Form{
+                position:fixed;
+                width: 35%;
+                top:0%;
+                height:100%;
+                background-color:white;
+                left:0%;
+                padding: 50px 30px;
+                font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                font-size: 30px;
+            }
+
+            .Product_select{
+                position: absolute;
+                width: 50%;
+                height: 5%;
+                top: 30%;
+                left:35%;
+                padding: 0px 30px;
+                border-radius:30px;
+                margin-left: 5%;
+                font-size:20px;
+                
+
+   
+    
+              
+            }
+            .Product_select:focus{
+                border:2px solid grey;
+            }
+
+            @keyframes spin{
+                from{
+                    transform: rotate(0deg)
+
+                }
+
+                to{
+                    transform: rotate(360deg)
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper"></div>
+
+        
+
+
+        <script>
+            function setup_initial(){
+                const form = document.createElement("form")
+                form.id = "Pitch_Form"
+                document.body.appendChild(form)
+                const header = document.createElement("h1")
+                header.textContent = "Startup Details"
+                form.appendChild(header)
+                
+                
+                const Product_select = document.createElement("select")
+                Product_select.id = "Product_Stage"
+                Product_select.required = true
+                const default_option = document.createElement("option")
+                default_option.disabled = true
+                default_option.selected = true
+                default_option.textContent = "Select Stage"
+                Product_select.appendChild(default_option)
+                Product_select.className = "Product_select"
+                const option_Idea = document.createElement("option")
+                option_Idea.textContent = "Idea"
+                option_Idea.value = "Idea"
+                Product_select.appendChild(option_Idea)
+                const option_MVP = document.createElement("option")
+                option_MVP.textContent = "MVP"
+                option_MVP.value = "MVP"
+                Product_select.appendChild(option_MVP)
+                const option_Revenue = document.createElement("option")
+                option_Revenue.textContent = "Early Revenue"
+                option_Revenue.value = "Early Revenue"
+                Product_select.appendChild(option_Revenue)
+                
+                
+                form.appendChild(Product_select)
+                const label_product = document.createElement("label")
+                label_product.setAttribute("for", "Product_Stage")
+                label_product.textContent = "Product Stage:"
+                label_product.style.position = "absolute"
+                label_product.style.top = "30%"
+                form.appendChild(label_product)
+                const h2 = document.createElement("h2")
+                h2.textContent = "Startup Description"
+                h2.style.position = "absolute"
+                h2.style.top = "35%"
+                form.appendChild(h2)
+                
+                const startup_textarea = document.createElement("textarea")
+                startup_textarea.placeholder = "Describe your Startup"
+                startup_textarea.style.position = "absolute"
+                startup_textarea.style.width = "80%"
+                startup_textarea.style.height = "20%"
+                startup_textarea.style.padding = "20px 20px"
+                startup_textarea.required = true
+                
+               
+                startup_textarea.style.top = "47.5%"
+                form.appendChild(startup_textarea)
+
+                const generate_pitch = document.createElement("button")
+                generate_pitch.style.backgroundColor = "rgb(0, 0, 255)"
+                
+                generate_pitch.style.color = "white"
+                generate_pitch.style.top = "75%"
+                generate_pitch.style.position = "absolute"
+                generate_pitch.type = "submit"
+                
+                generate_pitch.style.borderRadius = "999px"
+                generate_pitch.style.width = "50%"
+                generate_pitch.style.height = "5%"
+                generate_pitch.style.border = "none"
+                generate_pitch.style.fontSize = "20px"
+                generate_pitch.textContent = "Generate Pitch"
+                generate_pitch.style.transition = "all 0.3s ease"
+                generate_pitch.onmouseover = function(){
+                    generate_pitch.style.backgroundColor = "rgb(0, 0, 125)"
+                    generate_pitch.style.cursor = "pointer"
+                    
+                }
+
+                generate_pitch.onmouseout = function(event){
+                    generate_pitch.style.backgroundColor = "rgb(0, 0, 255)"
+                }
+
+                
+                
+                form.appendChild(generate_pitch)
+
+                
+
+                const Pitch_div = document.createElement("div")
+                Pitch_div.contentEditable = true
+                Pitch_div.style.position = "absolute"
+                Pitch_div.style.width = "40%"
+                Pitch_div.style.left = "50%"
+                Pitch_div.style.top = "20%"
+                Pitch_div.style.padding = "50px 30px"
+                
+                Pitch_div.style.height = "60%"
+                Pitch_div.style.fontSize = "30px"
+                Pitch_div.style.backgroundColor = "rgb(255, 255, 255)"
+                Pitch_div.style.borderRadius = "5%"
+                Pitch_div.style.display = "flex"
+                Pitch_div.style.justifyContent = "center"
+                Pitch_div.style.alignItems = "center"
+                document.body.appendChild(Pitch_div)
+                const Header = document.createElement("h1")
+                Header.textContent = "The Startup Pitch"
+                Header.style.backgroundColor = "white"
+                Header.style.padding = "20px 20px"
+                Header.style.width = "40%"
+                Header.style.position = "absolute"
+                Header.style.top = "1%"
+                Header.style.left = "50%"
+                document.body.appendChild(Header)
+                form.onsubmit = function(event){
+                    event.preventDefault()
+                    Pitch_div.style.filter = "blur(2.5px)"
+                    const spinner = document.createElement("div")
+                    spinner.style.backgroundColor = "rgb(255,255,255)"
+                    spinner.style.border = "5px solid black"
+                    spinner.style.borderTop = "5px solid lightgray"
+                    spinner.style.borderRadius = "50%"
+                    spinner.style.width = "200px"
+                    spinner.style.height = "200px"
+                    spinner.style.animation= "spin 1s linear infinite";
+                    spinner.style.position = "absolute"
+                    spinner.style.left = "65%"
+                    spinner.style.top = "47.5%"
+                    document.body.appendChild(spinner)
+                    fetch("/generate_pitch", {method: "POST", headers : {"Content-type": "application/json"}, body: JSON.stringify({ProductStage: Product_select.value, StartupDescription: startup_textarea.value})})
+                    .then(response => response.json())
+                    .then(function(data){
+                        if(data.error){
+                            alert(data.error)
+                        }
+
+                        else{
+                            Pitch_div.textContent = `${data.pitch}`
+                        }
+                        
+                        Pitch_div.style.filter = ""
+                        spinner.remove()
+                        
+                        
+                        
+                        
+                    })
+
+
+
+                    
+                }
+
+
+
+                
+            }
+
+            setup_initial()
+        </script>
+
+    </body>
+    
+</html>
