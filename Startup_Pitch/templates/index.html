@@ -205,7 +205,75 @@
                     .then(function(data){
                         generate_pitch.disabled = false
                         if(data.error){
-                            alert(data.error)
+                            const overlay = document.createElement("div")
+                            overlay.style.backgroundColor = "black"
+                            overlay.style.opacity = "0.5"
+                            overlay.style.position = "fixed"
+                            overlay.style.top = "0%"
+                            overlay.style.left = "0%"
+                            overlay.style.width = "100%"
+                            overlay.style.height = "100%"
+                            document.body.appendChild(overlay)
+                            const err_message = document.createElement("div")
+                            err_message.style.position = "fixed"
+                            err_message.style.padding = "40px 30px"
+                            const h3 = document.createElement("h2")
+                            h3.textContent = "Error"
+                            h3.style.position = "absolute"
+                            h3.style.top = "20%"
+
+                            
+                            err_message.appendChild(h3)
+                            
+                            
+                            err_message.style.backgroundColor = "white"
+                            err_message.style.left = "50%"
+                            err_message.style.top = "20%"
+                            
+                            err_message.style.width = "400px"
+                            err_message.style.height = "300px"
+                            err_message.style.display = "flex"
+                            err_message.style.justifyContent = "center"
+                            err_message.style.alignItems = "center"
+                        
+                            err_message.innerHTML = err_message.innerHTML + `${data.error}`
+                            document.body.appendChild(err_message)
+                            const button = document.createElement("button")
+                            button.style.backgroundColor = "blue"
+                            button.style.color = "white"
+                            button.style.width = "100px"
+                            button.style.height = "50px"
+                            button.style.border = "none"
+                            button.textContent = "Cancel"
+                            button.style.position = "absolute"
+                            button.style.top = "80%"
+                            button.style.left = "10%"
+                            button.onclick = function(event){
+                                err_message.remove()
+                                overlay.remove()
+                            }
+
+                            
+                            err_message.appendChild(button)
+                            const button_retry = document.createElement("button")
+                            button_retry.style.backgroundColor = "blue"
+                            button_retry.style.color = "white"
+                            button_retry.style.width = "100px"
+                            button_retry.style.height = "50px"
+                            button_retry.style.border = "none"
+                            button_retry.textContent = "Retry"
+                            button_retry.style.position = "absolute"
+                            button_retry.style.top = "80%"
+                            button_retry.style.left = "70%"
+                            button_retry.onclick = function(event){
+                                overlay.remove()
+                                err_message.remove()
+                                generate_pitch.click()
+                            }
+                            err_message.appendChild(button_retry)
+
+
+                            
                         }
 
                         else{

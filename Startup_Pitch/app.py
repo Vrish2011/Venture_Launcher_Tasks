@@ -39,15 +39,15 @@ def validate_data(data):
         if int(startupForm.StartupDescriptionLen) < 10:
             return {"error" : "The Prompt is too Short, make sure it is 10 atleast words"}
         client = OpenAI(api_key=API_KEY, base_url="https://openrouter.ai/api/v1")
-        response = client.chat.completions.create(model="openai/gpt-oss-120b:free", messages=[{"role": "user", "content" : f"Is this startup description: {startupForm.StartupDescription} too vague for an investor pitch reply in one word Yes or No nothing else"}])
-        if "yes" in response.choices[0].message.content.lower():
-            return {"error" : "Your Startup Description is too vague"}
+        response = client.chat.completions.create(model="openai/gpt-oss-120b:free", messages=[{"role": "user", "content" : f"Is this startup description: {startupForm.StartupDescription}, does this description provide a decently precise and accurate description of the startup, if not say No, if it does provide say Yes nothing else in one word"}])
+        if "no" in response.choices[0].message.content.lower():
+            return {"error" : "Your Startup Description is too vague, try adding more details in your startup description, I would suggest clicking the button How to use to help better strcuture your prompts"}
         
            
         return startupForm
     except:
         
-        return {"error": "You need to add a product stage"}
+        return {"error": "Model Response failed, because it seems you have not added the Product Stage"}
         
 
 
@@ -88,5 +88,5 @@ async def generate_startup_pitch(request: Request):
 
 
         
-uvicorn.run("app:app", port=8000)
+uvicorn.run("app:app", port=8011)
 
